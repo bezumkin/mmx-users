@@ -1,0 +1,25 @@
+{
+  "name": "mmx/users",
+  "type": "library",
+  "license": "MIT",
+  "description": "Convenient management of MODX users",
+  "authors": [
+    {
+      "name": "Vasily Naumkin",
+      "email": "bezumkin@yandex.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MMX\\Users\\": "core/src/"
+    }
+  },
+  "bin": [
+    "bin/mmx-users"
+  ],
+  "require": {
+    "php": ">=8.1",
+    "vesp/core": "^4.0",
+    "mmx/database": "^1.3"
+  }
+}
