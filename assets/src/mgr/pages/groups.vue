@@ -15,12 +15,13 @@ const fields = computed(() => {
     {key: 'id', label: $t('models.user_group.id'), sortable: true},
     {key: 'name', label: $t('models.user_group.name'), sortable: true},
     {key: 'parent.name', label: $t('models.user_group.parent')},
+    {key: 'members_count', label: $t('models.user.title_many'), sortable: true},
     {key: 'rank', label: $t('models.user_group.rank'), sortable: true},
   ]
 })
 const tableActions = computed(() => {
   return [
-    {route: {name: 'groups-id-edit'}, icon: 'edit', title: $t('actions.edit')},
+    {route: {name: 'groups-id'}, icon: 'edit', title: $t('actions.edit')},
     {function: table.value?.delete, icon: 'times', title: $t('actions.delete'), variant: 'danger'},
   ]
 })

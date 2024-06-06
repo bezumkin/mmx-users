@@ -10,7 +10,8 @@
     "eslint:fix": "eslint --fix --ext .js,.vue ./src"
   },
   "dependencies": {
-    "@vesp/mmx-frontend": "^1.7.0",
+    "@vesp/mmx-frontend": "^1.7.1",
+    "vanilla-jsoneditor": "^0.23.7",
     "vue": "^3.4.21"
   },
   "devDependencies": {

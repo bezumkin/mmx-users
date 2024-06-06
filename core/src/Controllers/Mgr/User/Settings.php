@@ -1,22 +1,23 @@
 <?php
 
-namespace MMX\Users\Controllers\Mgr;
+namespace MMX\Users\Controllers\Mgr\User;
 
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Eloquent\Builder;
-use MMX\Database\Models\UserGroup;
+use MMX\Database\Models\UserSetting;
 use MMX\Users\App;
 use MODX\Revolution\modX;
 use MODX\Revolution\Processors\ProcessorResponse;
-use MODX\Revolution\Processors\Security\Group\Create;
-use MODX\Revolution\Processors\Security\Group\Remove;
-use MODX\Revolution\Processors\Security\Group\Update;
+use MODX\Revolution\Processors\Security\User\Setting\Create;
+use MODX\Revolution\Processors\Security\User\Setting\Remove;
+use MODX\Revolution\Processors\Security\User\Setting\Update;
 use Psr\Http\Message\ResponseInterface;
 use Vesp\Controllers\ModelController;
 
-class UserGroups extends ModelController
+class Settings extends ModelController
 {
-    protected string $model = UserGroup::class;
+    protected string $model = UserSetting::class;
+    protected string|array $primaryKey = ['user', 'key'];
     protected modX $modx;
 
     public function __construct(Manager $eloquent, modX $modx)
@@ -25,28 +26,24 @@ class UserGroups extends ModelController
         $this->modx = $modx;
     }
 
-    protected function beforeCount(Builder $c): Builder
+    protected function beforeGet(Builder $c): Builder
     {
-        if ($query = trim($this->getProperty('query', ''))) {
-            $c->where(static function (Builder $c) use ($query) {
-                $c->where('name', 'LIKE', "%$query%");
-                $c->orWhere('description', 'LIKE', "%$query%");
-            });
-        }
-        if ($exclude = $this->getProperty('exclude')) {
-            $c->where('id', '!=', $exclude);
-        }
+        $c->where('user', $this->getProperty('user'));
 
         return $c;
     }
 
-    protected function afterCount(Builder $c): Builder
+    protected function beforeCount(Builder $c): Builder
     {
-        if ($this->getProperty('combo')) {
-            $c->select('id', 'name');
-        } else {
-            $c->with('Parent');
-            $c->withCount('Members');
+        $c->where('user', $this->getProperty('user'));
+
+        if ($query = $this->getProperty('query')) {
+            $c->where(static function(Builder $c) use ($query) {
+                $c->where('key', 'LIKE', "%$query%");
+                $c->orWhere('value', 'LIKE', "%$query%");
+                $c->orWhere('namespace', 'LIKE', "%$query%");
+                $c->orWhere('area', 'LIKE', "%$query%");
+            });
         }
 
         return $c;
@@ -64,12 +61,13 @@ class UserGroups extends ModelController
             return $this->failure($message);
         }
 
-        return $this->success();
+        return $this->success($response->getObject());
     }
 
     public function patch(): ResponseInterface
     {
         $properties = $this->getProperties();
+        $properties['fk'] = $properties['user'];
         /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(Update::class, $properties);
         if ($response->isError()) {
@@ -79,7 +77,7 @@ class UserGroups extends ModelController
             return $this->failure($message);
         }
 
-        return $this->success();
+        return $this->success($response->getObject());
     }
 
     public function delete(): ResponseInterface

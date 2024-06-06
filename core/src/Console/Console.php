@@ -10,6 +10,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\ListCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 class Console extends Application
 {
@@ -29,7 +30,7 @@ class Console extends Application
                 $output->writeln('<info>Trying to install mmx/database...</info>');
                 $cli->doRun($input, $output);
                 $output->writeln('<info>Done! Continue to install ' . App::NAME . '</info>');
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 $output->writeln('<error>Could not load mmxDatabase service</error>');
                 $output->writeln('<info>Please run "composer exec mmx-database install"</info>');
                 exit;

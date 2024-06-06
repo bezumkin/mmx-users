@@ -1,22 +1,22 @@
 <?php
 
-namespace MMX\Users\Controllers\Mgr;
+namespace MMX\Users\Controllers\Mgr\User;
 
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Eloquent\Builder;
-use MMX\Database\Models\UserGroup;
+use MMX\Database\Models\UserGroupMember;
 use MMX\Users\App;
 use MODX\Revolution\modX;
 use MODX\Revolution\Processors\ProcessorResponse;
-use MODX\Revolution\Processors\Security\Group\Create;
-use MODX\Revolution\Processors\Security\Group\Remove;
-use MODX\Revolution\Processors\Security\Group\Update;
+use MODX\Revolution\Processors\Security\Group\User\Create;
+use MODX\Revolution\Processors\Security\Group\User\Remove;
+use MODX\Revolution\Processors\Security\Group\User\Update;
 use Psr\Http\Message\ResponseInterface;
 use Vesp\Controllers\ModelController;
 
-class UserGroups extends ModelController
+class Groups extends ModelController
 {
-    protected string $model = UserGroup::class;
+    protected string $model = UserGroupMember::class;
     protected modX $modx;
 
     public function __construct(Manager $eloquent, modX $modx)
@@ -25,16 +25,22 @@ class UserGroups extends ModelController
         $this->modx = $modx;
     }
 
+    protected function beforeGet(Builder $c): Builder
+    {
+        $c->where('member', $this->getProperty('user'));
+
+        return $c;
+    }
+
     protected function beforeCount(Builder $c): Builder
     {
-        if ($query = trim($this->getProperty('query', ''))) {
-            $c->where(static function (Builder $c) use ($query) {
+        $c->where('member', $this->getProperty('user'));
+
+        if ($query = $this->getProperty('query')) {
+            $c->whereHas('Group', static function (Builder $c) use ($query) {
                 $c->where('name', 'LIKE', "%$query%");
                 $c->orWhere('description', 'LIKE', "%$query%");
             });
-        }
-        if ($exclude = $this->getProperty('exclude')) {
-            $c->where('id', '!=', $exclude);
         }
 
         return $c;
@@ -42,12 +48,8 @@ class UserGroups extends ModelController
 
     protected function afterCount(Builder $c): Builder
     {
-        if ($this->getProperty('combo')) {
-            $c->select('id', 'name');
-        } else {
-            $c->with('Parent');
-            $c->withCount('Members');
-        }
+        $c->with('Group:id,name');
+        $c->with('Role:id,name');
 
         return $c;
     }
@@ -55,6 +57,8 @@ class UserGroups extends ModelController
     public function put(): ResponseInterface
     {
         $properties = $this->getProperties();
+        $properties['usergroup'] = $properties['user_group'];
+        $properties['user'] = $properties['member'];
         /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(Create::class, $properties);
         if ($response->isError()) {
@@ -70,6 +74,8 @@ class UserGroups extends ModelController
     public function patch(): ResponseInterface
     {
         $properties = $this->getProperties();
+        $properties['usergroup'] = $properties['user_group'];
+        $properties['user'] = $properties['member'];
         /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(Update::class, $properties);
         if ($response->isError()) {
@@ -84,7 +90,12 @@ class UserGroups extends ModelController
 
     public function delete(): ResponseInterface
     {
-        $properties = $this->getProperties();
+        /** @var UserGroupMember $membershop */
+        if (!$membershop = UserGroupMember::query()->find($this->getProperty('id'))) {
+            return $this->failure('Could not find a record', 404);
+        }
+        $properties = ['usergroup' => $membershop->user_group, 'user' => $membershop->member];
+
         /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(Remove::class, $properties);
         if ($response->isError()) {

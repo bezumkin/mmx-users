@@ -6,8 +6,10 @@ use DI\Bridge\Slim\Bridge;
 use DI\Container;
 use MODX\Revolution\modSystemEvent;
 use MODX\Revolution\modX;
+use MODX\Revolution\Processors\ProcessorResponse;
 use Psr\Container\ContainerInterface;
 use Slim\Routing\RouteCollectorProxy;
+use Throwable;
 
 class App
 {
@@ -62,7 +64,7 @@ class App
         try {
             $_SERVER['QUERY_STRING'] = html_entity_decode($_SERVER['QUERY_STRING']);
             $app->run();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $code = $e->getCode();
             http_response_code(is_numeric($code) ? $code : 500);
             echo json_encode($e->getMessage());
@@ -74,17 +76,24 @@ class App
         $app->group(
             '/mgr',
             static function (RouteCollectorProxy $group) {
+                $group->any('/countries', Controllers\Mgr\Countries::class);
+                $group->any('/contexts', Controllers\Mgr\Contexts::class);
+                $group->any('/namespaces', Controllers\Mgr\Namespaces::class);
+
                 $group->any('/users[/{id:\d+}]', Controllers\Mgr\Users::class);
+                $group->any('/user/{user:\d+}/groups[/{id:\d+}]', Controllers\Mgr\User\Groups::class);
+                $group->any('/user/{user:\d+}/settings[/{key}]', Controllers\Mgr\User\Settings::class);
+                $group->any('/user/{user:\d+}/invite', Controllers\Mgr\User\Invite::class);
+                $group->any(
+                    '/user/{user:\d+}/commerce/addresses[/{id:\d+}]',
+                    Controllers\Mgr\User\CommerceAddresses::class
+                );
+
                 $group->any('/user-groups[/{id:\d+}]', Controllers\Mgr\UserGroups::class);
+                $group->any('/user-group-roles[/{id:\d+}]', Controllers\Mgr\UserGroupRoles::class);
+                $group->any('/user-group/{group:\d+}/users[/{id:\d+}]', Controllers\Mgr\UserGroup\Users::class);
             }
         )->add(Middlewares\Mgr::class);
-
-        /* $app->group(
-            '/web',
-            static function (RouteCollectorProxy $group) {
-                $group->map(['OPTIONS', 'GET'], '/items[/{id:\d+}]', Controllers\Web\Items::class);
-            }
-        ); */
     }
 
     public static function registerAssets($instance, bool $noCss = false): void
@@ -180,5 +189,17 @@ class App
         }, array_keys($entries));
 
         return array_combine($keys, array_values($entries));
+    }
+
+    public static function getErrorMessage(ProcessorResponse $response): string
+    {
+        if (!$message = $response->getMessage()) {
+            $message = 'errors.unknown';
+            if ($response->hasFieldErrors() && $errors = $response->getFieldErrors()) {
+                $message = current($errors)->message;
+            }
+        }
+
+        return $message;
     }
 }

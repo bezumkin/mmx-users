@@ -1,7 +1,7 @@
 <template>
   <MmxModal v-model="record" v-bind="properties">
     <template #form-fields>
-      <FormsUserGroup v-model="record" />
+      <FormUserGroup v-model="record" />
     </template>
   </MmxModal>
 </template>
@@ -11,6 +11,8 @@ const record = ref({
   name: '',
   description: '',
   active: true,
+  aw_parallel: false,
+  aw_contexts: [],
 })
 
 const properties = {
