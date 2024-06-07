@@ -1,0 +1,151 @@
+{
+  "_api-onBQ7tug.js": {
+    "file": "assets/api-onBQ7tug.js",
+    "name": "api",
+    "imports": [
+      "_vue-COS8aM9k.js"
+    ]
+  },
+  "_user-group.vue_vue_type_script_setup_true_lang-DczxeoJL.js": {
+    "file": "assets/user-group.vue_vue_type_script_setup_true_lang-DczxeoJL.js",
+    "name": "user-group.vue_vue_type_script_setup_true_lang",
+    "imports": [
+      "_vue-bootstrap-BvSPrray.js",
+      "_vesp-D0Z_8SFv.js",
+      "_vue-COS8aM9k.js",
+      "_api-onBQ7tug.js"
+    ]
+  },
+  "_vesp-D0Z_8SFv.js": {
+    "file": "assets/vesp-D0Z_8SFv.js",
+    "name": "vesp",
+    "imports": [
+      "_vue-bootstrap-BvSPrray.js",
+      "_vue-COS8aM9k.js",
+      "_vue-router-a3flUsTq.js",
+      "_api-onBQ7tug.js"
+    ]
+  },
+  "_vue-COS8aM9k.js": {
+    "file": "assets/vue-COS8aM9k.js",
+    "name": "vue"
+  },
+  "_vue-bootstrap-BvSPrray.js": {
+    "file": "assets/vue-bootstrap-BvSPrray.js",
+    "name": "vue-bootstrap",
+    "imports": [
+      "_vue-COS8aM9k.js"
+    ]
+  },
+  "_vue-router-a3flUsTq.js": {
+    "file": "assets/vue-router-a3flUsTq.js",
+    "name": "vue-router",
+    "imports": [
+      "_vue-COS8aM9k.js"
+    ]
+  },
+  "node_modules/vanilla-picker/dist/vanilla-picker.mjs": {
+    "file": "assets/vanilla-picker-B6E6ObS_.js",
+    "name": "vanilla-picker",
+    "src": "node_modules/vanilla-picker/dist/vanilla-picker.mjs",
+    "isDynamicEntry": true
+  },
+  "src/mgr.ts": {
+    "file": "assets/mgr-C9pqeK5L.js",
+    "name": "mgr",
+    "src": "src/mgr.ts",
+    "isEntry": true,
+    "imports": [
+      "_vue-COS8aM9k.js",
+      "_vue-router-a3flUsTq.js",
+      "_vesp-D0Z_8SFv.js",
+      "_vue-bootstrap-BvSPrray.js",
+      "_api-onBQ7tug.js"
+    ],
+    "dynamicImports": [
+      "node_modules/vanilla-picker/dist/vanilla-picker.mjs",
+      "src/mgr/pages/groups.vue",
+      "src/mgr/pages/groups/create.vue",
+      "src/mgr/pages/groups/[id]/index.vue",
+      "src/mgr/pages/groups/[id]/index/users/index.vue",
+      "src/mgr/pages/groups/[id]/index/users/index/[uid].vue"
+    ],
+    "css": [
+      "assets/mgr-B4mzLrM3.css"
+    ]
+  },
+  "src/mgr/pages/groups.vue": {
+    "file": "assets/groups-RqLbBWPD.js",
+    "name": "groups",
+    "src": "src/mgr/pages/groups.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vesp-D0Z_8SFv.js",
+      "_api-onBQ7tug.js",
+      "_vue-COS8aM9k.js",
+      "_vue-bootstrap-BvSPrray.js",
+      "_vue-router-a3flUsTq.js"
+    ]
+  },
+  "src/mgr/pages/groups/[id]/index.vue": {
+    "file": "assets/index-CFZrLJPd.js",
+    "name": "index",
+    "src": "src/mgr/pages/groups/[id]/index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vesp-D0Z_8SFv.js",
+      "_user-group.vue_vue_type_script_setup_true_lang-DczxeoJL.js",
+      "_vue-bootstrap-BvSPrray.js",
+      "_vue-COS8aM9k.js",
+      "_vue-router-a3flUsTq.js",
+      "_api-onBQ7tug.js"
+    ]
+  },
+  "src/mgr/pages/groups/[id]/index/users/index.vue": {
+    "file": "assets/index-Boo3oJAh.js",
+    "name": "index",
+    "src": "src/mgr/pages/groups/[id]/index/users/index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vesp-D0Z_8SFv.js",
+      "_vue-bootstrap-BvSPrray.js",
+      "_vue-router-a3flUsTq.js",
+      "_api-onBQ7tug.js",
+      "_vue-COS8aM9k.js"
+    ]
+  },
+  "src/mgr/pages/groups/[id]/index/users/index/[uid].vue": {
+    "file": "assets/_uid_-B2MjYKev.js",
+    "name": "_uid_",
+    "src": "src/mgr/pages/groups/[id]/index/users/index/[uid].vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vesp-D0Z_8SFv.js",
+      "src/mgr.ts",
+      "_vue-router-a3flUsTq.js",
+      "_api-onBQ7tug.js",
+      "_vue-COS8aM9k.js",
+      "_vue-bootstrap-BvSPrray.js"
+    ]
+  },
+  "src/mgr/pages/groups/create.vue": {
+    "file": "assets/create-fzUoZAjT.js",
+    "name": "create",
+    "src": "src/mgr/pages/groups/create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vesp-D0Z_8SFv.js",
+      "_user-group.vue_vue_type_script_setup_true_lang-DczxeoJL.js",
+      "_api-onBQ7tug.js",
+      "_vue-COS8aM9k.js",
+      "_vue-bootstrap-BvSPrray.js",
+      "_vue-router-a3flUsTq.js"
+    ]
+  },
+  "src/web.ts": {
+    "file": "assets/web-l0sNRNKZ.js",
+    "name": "web",
+    "src": "src/web.ts",
+    "isEntry": true
+  }
+}
