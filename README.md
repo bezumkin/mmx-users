@@ -19,6 +19,12 @@ cd /to/modx/root/
 wget https://raw.githubusercontent.com/modxcms/revolution/v3.0.5-pl/composer.json
 ```
 
+### Add Repository
+```bash
+composer config repositories.mmx-users vcs git@bitbucket.org:sterc/mmx-users.git
+```
+*You must have the appropriate SSH key to access the Sterc repository!*
+
 ### Install
 
 ```bash
