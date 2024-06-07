@@ -33,7 +33,7 @@
     </section>
 
     <BModal v-if="Boolean(member)" :model-value="true" v-bind="modalProps" :ok-disabled="!canSubmit">
-      <FormUserGroupMember v-if="member !== undefined" v-model="member" />
+      <FormUserGroupMember v-if="member !== undefined" v-model="member" :show-user="false" />
     </BModal>
   </div>
 </template>

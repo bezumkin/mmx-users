@@ -51,7 +51,7 @@
     "isDynamicEntry": true
   },
   "src/mgr.ts": {
-    "file": "assets/mgr-C9pqeK5L.js",
+    "file": "assets/mgr-LENZE7c0.js",
     "name": "mgr",
     "src": "src/mgr.ts",
     "isEntry": true,
@@ -115,7 +115,7 @@
     ]
   },
   "src/mgr/pages/groups/[id]/index/users/index/[uid].vue": {
-    "file": "assets/_uid_-B2MjYKev.js",
+    "file": "assets/_uid_-C5Wg5h2K.js",
     "name": "_uid_",
     "src": "src/mgr/pages/groups/[id]/index/users/index/[uid].vue",
     "isDynamicEntry": true,
