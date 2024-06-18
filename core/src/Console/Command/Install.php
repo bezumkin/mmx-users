@@ -95,7 +95,7 @@ class Install extends Command
                     'fullname' => ['sortable' => true],
                     'comment' => ['sortable' => true],
                     'email' => ['sortable' => true],
-                    'settings.twofactoroptions' => ['sortable' => true, 'type' => 'boolean'],
+                    // 'settings.twofactoroptions' => ['sortable' => true, 'type' => 'boolean'],
                 ], JSON_THROW_ON_ERROR),
             ],
             'user-form-fields-available' => [
@@ -118,28 +118,25 @@ class Install extends Command
                     'active' => ['type' => 'checkbox'],
                     'blocked' => ['type' => 'checkbox'],
                     'sudo' => ['type' => 'checkbox'],
-                    'extended.pay_afterwards' => ['type' => 'checkbox', 'default' => false],
-                    'settings.twofactoroptions' => ['type' => 'checkbox', 'default' => false],
-                    'extended.main_branch' => ['type' => 'select', 'options' => ['', 'Drachten', 'Leeuwarden']],
-                    'extended.max_days_order_overview' => ['type' => 'number', 'default' => 60],
-                    'comment' => ['type' => 'text', 'required' => true],
+                    'comment' => ['type' => 'text'],
                     'photo' => ['type' => 'image'],
-                    'extended.company_logo' => ['type' => 'image'],
                     'password' => ['type' => 'user-password'],
+                    // 'extended.something' => ['type' => 'checkbox', 'default' => false],
+                    // 'settings.twofactoroptions' => ['type' => 'checkbox', 'default' => false],
                 ], JSON_THROW_ON_ERROR),
             ],
             'user-form-fields-user' => [
                 'xtype' => 'textarea',
                 'value' => json_encode([
-                    ['username', 'email', 'fullname', 'website', 'password'],
-                    [['active', 'blocked'], ['extended.pay_afterwards', 'settings.twofactoroptions'], 'extended.main_branch', 'extended.max_days_order_overview', 'comment', 'extended.company_logo'],
+                    ['username', 'fullname', 'website', 'photo'],
+                    ['email', ['active', 'blocked'], 'comment', 'password'],
                 ], JSON_THROW_ON_ERROR),
             ],
             'user-form-fields-sudo' => [
                 'xtype' => 'textarea',
                 'value' => json_encode([
-                    ['username', 'email', 'fullname', ['dob', 'gender'], 'website', ['phone', 'mobilephone'], 'fax', 'country', ['state', 'city', 'zip'], 'address'],
-                    [['active', 'blocked', 'sudo'], ['extended.pay_afterwards', 'settings.twofactoroptions'], 'extended.main_branch', 'extended.max_days_order_overview', 'comment', 'photo', 'extended.company_logo', 'password'],
+                    ['username', 'fullname', ['phone', 'mobilephone'], 'fax', 'country', ['state', 'city', 'zip'], 'address'],
+                    ['email', ['dob', 'gender'], 'website', ['active', 'blocked'], 'sudo', 'comment', 'photo', 'password'],
                 ], JSON_THROW_ON_ERROR),
             ],
             'user-tabs-create' => [
@@ -148,7 +145,7 @@ class Install extends Command
             ],
             'user-tabs-edit' => [
                 'xtype' => 'textfield',
-                'value' => 'main,extended,groups,settings,commerce-addresses',
+                'value' => 'main,extended,groups,settings',
             ],
         ];
         foreach ($settings as $key => $data) {
