@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormLayoutUser v-model="record" :fields="userFields" class="mb-5" />
+    <FormLayoutUser v-model="record" :fields="userFields" />
   </div>
 </template>
 

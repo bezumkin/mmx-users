@@ -11,7 +11,7 @@
             <BFormInput v-model="record.specifiedpassword" type="password" autofocus :required="required" />
           </BFormGroup>
         </BCol>
-        <BCol md="6">
+        <BCol md="6" class="mt-3 mt-md-0">
           <BFormGroup :label="$t('models.user.password.confirm')">
             <BFormInput
               v-model="record.confirmpassword"

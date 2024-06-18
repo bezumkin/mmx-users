@@ -1,6 +1,6 @@
 <template>
-  <BRow v-if="Array.isArray(fields)" class="mb-2">
-    <BCol v-for="(col, colIdx) in fields" :key="colIdx" :md="size">
+  <BRow v-if="Array.isArray(fields)" class="mb-3">
+    <BCol v-for="(col, colIdx) in fields" :key="colIdx" :md="size" :class="colIdx > 0 ? 'mt-3 mt-md-0' : ''">
       <template v-if="Array.isArray(col)">
         <component :is="FormLayoutUser" v-for="(row, rowIdx) in col" :key="rowIdx" v-model="record" :fields="row" />
       </template>
