@@ -76,6 +76,7 @@ class App
         $app->group(
             '/mgr',
             static function (RouteCollectorProxy $group) {
+                $group->any('/version', Controllers\Mgr\Version::class);
                 $group->any('/countries', Controllers\Mgr\Countries::class);
                 $group->any('/contexts', Controllers\Mgr\Contexts::class);
                 $group->any('/namespaces', Controllers\Mgr\Namespaces::class);

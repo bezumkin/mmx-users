@@ -51,7 +51,7 @@
     "isDynamicEntry": true
   },
   "src/mgr.ts": {
-    "file": "assets/mgr-BP96vxn6.js",
+    "file": "assets/mgr-VIfk6e24.js",
     "name": "mgr",
     "src": "src/mgr.ts",
     "isEntry": true,
@@ -71,11 +71,11 @@
       "src/mgr/pages/groups/[id]/index/users/index/[uid].vue"
     ],
     "css": [
-      "assets/mgr-01rX7T3H.css"
+      "assets/mgr-HAZkoo5t.css"
     ]
   },
   "src/mgr/pages/groups.vue": {
-    "file": "assets/groups-CG1hQreB.js",
+    "file": "assets/groups-DK5oSjl3.js",
     "name": "groups",
     "src": "src/mgr/pages/groups.vue",
     "isDynamicEntry": true,
@@ -89,7 +89,7 @@
     ]
   },
   "src/mgr/pages/groups/[id]/index.vue": {
-    "file": "assets/index-BcDAPYRA.js",
+    "file": "assets/index-CProNWrS.js",
     "name": "index",
     "src": "src/mgr/pages/groups/[id]/index.vue",
     "isDynamicEntry": true,
@@ -117,7 +117,7 @@
     ]
   },
   "src/mgr/pages/groups/[id]/index/users/index/[uid].vue": {
-    "file": "assets/_uid_-Bv8YsMit.js",
+    "file": "assets/_uid_-DbXCAtiu.js",
     "name": "_uid_",
     "src": "src/mgr/pages/groups/[id]/index/users/index/[uid].vue",
     "isDynamicEntry": true,

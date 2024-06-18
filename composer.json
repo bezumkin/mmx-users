@@ -1,6 +1,7 @@
 {
   "name": "mmx/users",
   "type": "library",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "Convenient management of MODX users",
   "authors": [

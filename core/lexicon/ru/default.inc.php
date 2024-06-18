@@ -3,6 +3,9 @@
 $_tmp = [
     'menu_name' => 'mmxUsers',
     'menu_desc' => 'Удобное управление пользователями MODX',
+    'version' => [
+        'available' => 'доступна {version}',
+    ],
     'actions' => [
         'create' => 'Создать',
         'edit' => 'Изменить',
