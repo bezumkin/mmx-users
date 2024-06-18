@@ -10,6 +10,7 @@ class Home extends modExtraManagerController
     public function loadCustomCssJs(): void
     {
         App::registerAssets($this);
+        $this->addHtml('<script>MODx.user.sudo = ' . $this->modx->user->sudo . '</script>');
     }
 
     public function getPageTitle(): string

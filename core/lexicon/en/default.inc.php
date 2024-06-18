@@ -62,11 +62,24 @@ $_tmp = [
             'zip' => 'Zip',
             'address' => 'Address',
             'tabs' => [
-                'general' => 'General',
-                'extended' => 'Extended Fields',
-                'settings' => 'Settings',
-                'groups' => 'User Groups',
-                'addresses' => 'Addresses',
+                'main' => [
+                    'title' => 'Main',
+                ],
+                'extended' => [
+                    'title' => 'Extended Fields'
+                ],
+                'settings' => [
+                    'title' => 'Settings',
+                    'disabled' => 'Save your user first. After that you are able to manage settings.',
+                ],
+                'groups' => [
+                    'title' => 'User Groups'
+                ],
+                'commerce-addresses' => [
+                    'title' => 'Commerce Addresses',
+                    'disabled' => 'Save your user first. After that you are able to manage addresses.',
+                    'info' => "Please add at least one billing address.<br><br>If you don't add a shipping address, the billing address will be used there as well."
+                ],
             ],
             'filter' => [
                 'any' => 'All Users',
@@ -81,13 +94,25 @@ $_tmp = [
             'name' => 'Name',
             'description' => 'Description',
             'rank' => 'Rank',
-            'parent' => 'Parent',
+            'parent' => [
+                'name' => 'Parent',
+            ],
             'resource_group' => [
                 'create' => 'Also Create Resource Group',
                 'desc' => 'Specify Contexts that this User Group should be able to view.',
                 'select' => 'Select Context...',
             ],
             'filter_any' => 'All Groups',
+            'members_count' => 'Users',
+            'tabs' => [
+                'main' => [
+                    'title' => 'Main',
+                ],
+                'users' => [
+                    'title' => 'Users',
+                    'disabled' => 'Save your group first. After that you are able to manage users.',
+                ],
+            ],
         ],
         'user_group_role' => [
             'title_one' => 'User Role',
@@ -198,8 +223,24 @@ $_tmp = [
 $_lang = array_merge($_lang, MMX\Users\App::prepareLexicon($_tmp, MMX\Users\App::NAMESPACE));
 
 $_tmp = [
-    'some-setting' => 'Setting title',
-    'some-setting_desc' => 'Some setting description',
+    'group-grid-columns' => 'User group grid columns',
+    'group-grid-columns_desc' => 'Specify the order and settings of columns for user group grid',
+    'group-tabs-create' => 'User group create tabs',
+    'group-tabs-create_desc' => 'Tabs of user group modal when you create a new group. Available tabs are: main, users. Main tab is mandatory.',
+    'group-tabs-edit' => 'User group edit tabs',
+    'group-tabs-edit_desc' => 'Tabs of user group modal when you edit an existing group. Available tabs are: main, users.  Main tab is mandatory.',
+    'user-grid-columns' => 'User grid columns',
+    'user-grid-columns_desc' => 'Specify the order and settings of columns for user grid',
+    'user-form-fields-available' => 'Available user fields',
+    'user-form-fields-available_desc' => 'The list of all user fields with settings',
+    'user-form-fields-user' => 'User form fields',
+    'user-form-fields-user_desc' => 'Fields of user form for regular manager.',
+    'user-form-fields-sudo' => 'User fields for sudo',
+    'user-form-fields-sudo_desc' => 'Fields of user form for manager with sudo permissions. If the setting is empty, all fields will be enabled.',
+    'user-tabs-create' => 'User create tabs',
+    'user-tabs-create_desc' => 'Tabs of user modal when you create a new user. Available tabs are: main, extended, settings, groups and commerce-addresses. Main tab is mandatory.',
+    'user-tabs-edit' => 'User edit tabs',
+    'user-tabs-edit_desc' => 'Tabs of user modal when you edit an existing user. Available tabs are: main, extended, settings, groups and commerce-addresses.  Main tab is mandatory.',
 ];
 $_lang = array_merge($_lang, MMX\Users\App::prepareLexicon($_tmp, 'setting_' . MMX\Users\App::NAMESPACE));
 

@@ -1,5 +1,12 @@
 <template>
   <MmxTable ref="table" v-bind="{url, fields, headerActions, tableActions, filters, sort, dir}">
+    <template #cell()="{value, field}">
+      <div v-if="cellType(field.key).startsWith('bool')">
+        <i v-if="Number(value)" class="icon icon-check text-success" />
+        <i v-else class="icon icon-times text-danger" />
+      </div>
+      <template v-else>{{ value }}</template>
+    </template>
     <RouterView />
   </MmxTable>
 </template>
@@ -8,16 +15,23 @@
 const url = 'mgr/user-groups'
 const table = ref()
 const headerActions = computed(() => {
-  return [{route: {name: 'groups-create'}, icon: 'plus', title: $t('models.user_group.title_one')}]
+  return [{route: {name: 'groups-id', params: {id: 0}}, icon: 'plus', title: $t('models.user_group.title_one')}]
 })
 const fields = computed(() => {
-  return [
-    {key: 'id', label: $t('models.user_group.id'), sortable: true},
-    {key: 'name', label: $t('models.user_group.name'), sortable: true},
-    {key: 'parent.name', label: $t('models.user_group.parent')},
-    {key: 'members_count', label: $t('models.user.title_many'), sortable: true},
-    {key: 'rank', label: $t('models.user_group.rank'), sortable: true},
-  ]
+  const columns = getSystemSetting('group-grid-columns')
+  const enabled: any = []
+  Object.keys(columns).forEach((key: string) => {
+    const field = {key, label: $t('models.user_group.' + key), ...columns[key]}
+    if (key === 'createdon') {
+      field.formatter = formatDate
+    }
+    if (field.sort) {
+      sort.value = key
+      dir.value = field.dir === 'desc' ? 'desc' : 'asc'
+    }
+    enabled.push(field)
+  })
+  return enabled
 })
 const tableActions = computed(() => {
   return [
@@ -28,4 +42,9 @@ const tableActions = computed(() => {
 const filters = ref({query: ''})
 const sort = ref('rank')
 const dir = ref('asc')
+
+function cellType(key: string) {
+  const field = fields.value.find((f: any) => f.key === key)
+  return field && field.type ? field.type : ''
+}
 </script>

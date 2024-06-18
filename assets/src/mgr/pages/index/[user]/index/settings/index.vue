@@ -1,7 +1,10 @@
 <template>
-  <MmxTable ref="table" v-bind="{url, fields, headerActions, tableActions, updateKey, filters, sort, dir}">
-    <RouterView />
-  </MmxTable>
+  <div>
+    <div v-if="!Number(params.user)" class="alert alert-info" v-html="$t('models.user.tabs.settings.disabled')" />
+    <MmxTable v-else ref="table" v-bind="{url, fields, headerActions, tableActions, updateKey, filters, sort, dir}">
+      <RouterView />
+    </MmxTable>
+  </div>
 </template>
 
 <script setup lang="ts">

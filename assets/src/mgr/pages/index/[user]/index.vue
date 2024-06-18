@@ -2,22 +2,16 @@
   <MmxModal v-model="record" v-bind="properties">
     <template #form-fields>
       <BNav tabs>
-        <BNavItem
-          :to="{name: 'index-user', params: {user: record.id}}"
-          :active="!tab"
-          active-class=""
-          @click="tab = ''"
-        >
-          {{ $t('models.user.tabs.general') }}
-        </BNavItem>
-        <BNavItem
-          v-for="key in tabs"
-          :key="key"
-          :to="{name: 'index-user-index-' + key, params: {user: record.id}}"
-          @click="tab = key"
-        >
-          {{ $t('models.user.tabs.' + key) }}
-        </BNavItem>
+        <template v-for="key in tabs" :key="key">
+          <BNavItem
+            :to="{name: key === 'main' ? 'index-user' : 'index-user-index-' + key, params: {user: record.id}}"
+            :active="key === 'main' ? !tab : tab === key"
+            active-class=""
+            @click="tab = key === 'main' ? '' : key"
+          >
+            {{ $t('models.user.tabs.' + key + '.title') }}
+          </BNavItem>
+        </template>
       </BNav>
       <div class="mt-3">
         <FormUser v-show="!tab" v-model="record" />
@@ -30,17 +24,31 @@
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const record = ref<Record<string, any>>({})
+
+const userId = Number(route.params.user)
+const record = ref({
+  id: 0,
+  username: '',
+  fullname: '',
+  email: '',
+  active: true,
+  newpassword: !userId,
+  specifiedpassword: '',
+  confirmpassword: '',
+  extended: {},
+  settings: [],
+  groups: [],
+})
 
 const tab = ref('')
 const properties = computed(() => {
   return {
-    url: 'mgr/users/' + route.params.user,
-    title: $t('models.user.title_one') + ': ' + record.value.username,
+    url: 'mgr/users' + (userId ? '/' + userId : ''),
+    title: $t('models.user.title_one') + (userId ? ': ' + record.value.username : ''),
     updateKey: 'mgr-users',
-    method: 'patch',
+    method: userId ? 'patch' : 'put',
     size: 'lg',
-    hideFooter: Boolean(tab.value) && tab.value !== 'extended',
+    hideFooter: userId && ['settings', 'groups', 'commerce-addresses'].includes(tab.value),
     onHidden() {
       router.push({name: 'index'})
     },
@@ -52,19 +60,26 @@ const properties = computed(() => {
   }
 })
 
-try {
-  record.value = await useGet(properties.value.url)
-} catch (e) {
-  console.error(e)
-  useError()
+if (userId) {
+  try {
+    record.value = await useGet(properties.value.url)
+  } catch (e) {
+    console.error(e)
+    useError()
+  }
 }
 
-const tabs = ['extended', 'groups', 'settings', 'addresses']
-tabs.forEach((g) => {
+const tabs = getSystemSetting(userId ? 'user-tabs-edit' : 'user-tabs-create')
+  .split(',')
+  .map((g: string) => g.trim())
+tabs.forEach((g: string) => {
   if (String(route.name).includes(g)) {
     tab.value = g
   }
 })
+if (!tabs.includes('main')) {
+  tabs.unshift('main')
+}
 
 provide('record', record)
 </script>

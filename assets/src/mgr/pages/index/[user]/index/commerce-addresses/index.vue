@@ -1,22 +1,32 @@
 <template>
-  <MmxTable ref="table" v-bind="{url, fields, headerActions, tableActions, filters, sort, dir, updateKey}">
-    <template #header-middle>
-      <BFormSelect v-model="filters.type" :options="types" />
-    </template>
-    <template #cell(receiver)="{item}">
-      <div v-if="item.fullname">{{ item.fullname }}</div>
-      <div class="small text-muted">
-        {{ formatReceiver(item) }}
-      </div>
-    </template>
-    <template #cell(address)="{item}">
-      {{ formatAddress(item) }}
-      <div class="small text-muted">
-        {{ formatAddressData(item) }}
-      </div>
-    </template>
-    <RouterView />
-  </MmxTable>
+  <div>
+    <div
+      v-if="!Number(params.user)"
+      class="alert alert-info"
+      v-html="$t('models.user.tabs.commerce-addresses.disabled')"
+    />
+    <div v-else>
+      <div class="alert alert-light" v-html="$t('models.user.tabs.commerce-addresses.info')" />
+      <MmxTable ref="table" v-bind="{url, fields, headerActions, tableActions, filters, sort, dir, updateKey}">
+        <template #header-middle>
+          <BFormSelect v-model="filters.type" :options="types" />
+        </template>
+        <template #cell(receiver)="{item}">
+          <div v-if="item.fullname">{{ item.fullname }}</div>
+          <div class="small text-muted">
+            {{ formatReceiver(item) }}
+          </div>
+        </template>
+        <template #cell(address)="{item}">
+          {{ formatAddress(item) }}
+          <div class="small text-muted">
+            {{ formatAddressData(item) }}
+          </div>
+        </template>
+        <RouterView />
+      </MmxTable>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -29,7 +39,7 @@ const table = ref()
 const headerActions = computed(() => {
   return [
     {
-      route: {name: 'index-user-index-addresses-index-address', params: {address: 0}},
+      route: {name: 'index-user-index-commerce-addresses-index-address', params: {address: 0}},
       icon: 'plus',
       title: $t('models.commerce.address.title_one'),
     },
@@ -48,7 +58,7 @@ const fields = computed(() => {
 const tableActions = computed(() => {
   return [
     {
-      route: {name: 'index-user-index-addresses-index-address'},
+      route: {name: 'index-user-index-commerce-addresses-index-address'},
       map: {user: 'user', address: 'id'},
       icon: 'edit',
       title: $t('actions.edit'),

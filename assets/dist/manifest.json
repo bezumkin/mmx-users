@@ -1,37 +1,37 @@
 {
-  "_api-onBQ7tug.js": {
-    "file": "assets/api-onBQ7tug.js",
+  "_api-C4uRSHIu.js": {
+    "file": "assets/api-C4uRSHIu.js",
     "name": "api",
     "imports": [
       "_vue-COS8aM9k.js"
     ]
   },
-  "_user-group.vue_vue_type_script_setup_true_lang-DczxeoJL.js": {
-    "file": "assets/user-group.vue_vue_type_script_setup_true_lang-DczxeoJL.js",
+  "_user-group.vue_vue_type_script_setup_true_lang-DVsCRd5n.js": {
+    "file": "assets/user-group.vue_vue_type_script_setup_true_lang-DVsCRd5n.js",
     "name": "user-group.vue_vue_type_script_setup_true_lang",
     "imports": [
-      "_vue-bootstrap-BvSPrray.js",
-      "_vesp-D0Z_8SFv.js",
+      "_vue-bootstrap-DqOMAocd.js",
+      "_vesp-3mqwPoPx.js",
       "_vue-COS8aM9k.js",
-      "_api-onBQ7tug.js"
+      "_api-C4uRSHIu.js"
     ]
   },
-  "_vesp-D0Z_8SFv.js": {
-    "file": "assets/vesp-D0Z_8SFv.js",
+  "_vesp-3mqwPoPx.js": {
+    "file": "assets/vesp-3mqwPoPx.js",
     "name": "vesp",
     "imports": [
-      "_vue-bootstrap-BvSPrray.js",
+      "_vue-bootstrap-DqOMAocd.js",
       "_vue-COS8aM9k.js",
       "_vue-router-a3flUsTq.js",
-      "_api-onBQ7tug.js"
+      "_api-C4uRSHIu.js"
     ]
   },
   "_vue-COS8aM9k.js": {
     "file": "assets/vue-COS8aM9k.js",
     "name": "vue"
   },
-  "_vue-bootstrap-BvSPrray.js": {
-    "file": "assets/vue-bootstrap-BvSPrray.js",
+  "_vue-bootstrap-DqOMAocd.js": {
+    "file": "assets/vue-bootstrap-DqOMAocd.js",
     "name": "vue-bootstrap",
     "imports": [
       "_vue-COS8aM9k.js"
@@ -51,16 +51,16 @@
     "isDynamicEntry": true
   },
   "src/mgr.ts": {
-    "file": "assets/mgr-LENZE7c0.js",
+    "file": "assets/mgr-FvmjaB9x.js",
     "name": "mgr",
     "src": "src/mgr.ts",
     "isEntry": true,
     "imports": [
       "_vue-COS8aM9k.js",
       "_vue-router-a3flUsTq.js",
-      "_vesp-D0Z_8SFv.js",
-      "_vue-bootstrap-BvSPrray.js",
-      "_api-onBQ7tug.js"
+      "_vesp-3mqwPoPx.js",
+      "_vue-bootstrap-DqOMAocd.js",
+      "_api-C4uRSHIu.js"
     ],
     "dynamicImports": [
       "node_modules/vanilla-picker/dist/vanilla-picker.mjs",
@@ -71,74 +71,76 @@
       "src/mgr/pages/groups/[id]/index/users/index/[uid].vue"
     ],
     "css": [
-      "assets/mgr-B4mzLrM3.css"
+      "assets/mgr-01rX7T3H.css"
     ]
   },
   "src/mgr/pages/groups.vue": {
-    "file": "assets/groups-RqLbBWPD.js",
+    "file": "assets/groups-BLKSFjGu.js",
     "name": "groups",
     "src": "src/mgr/pages/groups.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_vesp-D0Z_8SFv.js",
-      "_api-onBQ7tug.js",
+      "_vesp-3mqwPoPx.js",
+      "_api-C4uRSHIu.js",
+      "src/mgr.ts",
       "_vue-COS8aM9k.js",
-      "_vue-bootstrap-BvSPrray.js",
+      "_vue-bootstrap-DqOMAocd.js",
       "_vue-router-a3flUsTq.js"
     ]
   },
   "src/mgr/pages/groups/[id]/index.vue": {
-    "file": "assets/index-CFZrLJPd.js",
+    "file": "assets/index-Cg1MJp01.js",
     "name": "index",
     "src": "src/mgr/pages/groups/[id]/index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_vesp-D0Z_8SFv.js",
-      "_user-group.vue_vue_type_script_setup_true_lang-DczxeoJL.js",
-      "_vue-bootstrap-BvSPrray.js",
+      "_vesp-3mqwPoPx.js",
+      "_user-group.vue_vue_type_script_setup_true_lang-DVsCRd5n.js",
+      "_vue-bootstrap-DqOMAocd.js",
       "_vue-COS8aM9k.js",
       "_vue-router-a3flUsTq.js",
-      "_api-onBQ7tug.js"
+      "_api-C4uRSHIu.js",
+      "src/mgr.ts"
     ]
   },
   "src/mgr/pages/groups/[id]/index/users/index.vue": {
-    "file": "assets/index-Boo3oJAh.js",
+    "file": "assets/index-BuKH7A8z.js",
     "name": "index",
     "src": "src/mgr/pages/groups/[id]/index/users/index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_vesp-D0Z_8SFv.js",
-      "_vue-bootstrap-BvSPrray.js",
+      "_vesp-3mqwPoPx.js",
+      "_vue-bootstrap-DqOMAocd.js",
       "_vue-router-a3flUsTq.js",
-      "_api-onBQ7tug.js",
+      "_api-C4uRSHIu.js",
       "_vue-COS8aM9k.js"
     ]
   },
   "src/mgr/pages/groups/[id]/index/users/index/[uid].vue": {
-    "file": "assets/_uid_-C5Wg5h2K.js",
+    "file": "assets/_uid_-Cy_BgkgY.js",
     "name": "_uid_",
     "src": "src/mgr/pages/groups/[id]/index/users/index/[uid].vue",
     "isDynamicEntry": true,
     "imports": [
-      "_vesp-D0Z_8SFv.js",
+      "_vesp-3mqwPoPx.js",
       "src/mgr.ts",
       "_vue-router-a3flUsTq.js",
-      "_api-onBQ7tug.js",
+      "_api-C4uRSHIu.js",
       "_vue-COS8aM9k.js",
-      "_vue-bootstrap-BvSPrray.js"
+      "_vue-bootstrap-DqOMAocd.js"
     ]
   },
   "src/mgr/pages/groups/create.vue": {
-    "file": "assets/create-fzUoZAjT.js",
+    "file": "assets/create-CCDyml80.js",
     "name": "create",
     "src": "src/mgr/pages/groups/create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_vesp-D0Z_8SFv.js",
-      "_user-group.vue_vue_type_script_setup_true_lang-DczxeoJL.js",
-      "_api-onBQ7tug.js",
+      "_vesp-3mqwPoPx.js",
+      "_user-group.vue_vue_type_script_setup_true_lang-DVsCRd5n.js",
+      "_api-C4uRSHIu.js",
       "_vue-COS8aM9k.js",
-      "_vue-bootstrap-BvSPrray.js",
+      "_vue-bootstrap-DqOMAocd.js",
       "_vue-router-a3flUsTq.js"
     ]
   },

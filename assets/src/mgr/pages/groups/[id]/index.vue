@@ -2,19 +2,17 @@
   <MmxModal v-model="record" v-bind="properties">
     <template #form-fields>
       <BNav tabs>
-        <BNavItem :to="{name: 'groups-id', params: {id: record.id}}" :active="!tab" active-class="" @click="tab = ''">
-          {{ $t('models.user_group.title_one') }}
-        </BNavItem>
-        <BNavItem
-          v-for="(title, key) in tabs"
-          :key="key"
-          :to="{name: 'groups-id-index-' + key, params: {id: record.id}}"
-          @click="tab = key"
-        >
-          {{ $t(title) }}
-        </BNavItem>
+        <template v-for="key in tabs" :key="key">
+          <BNavItem
+            :to="{name: key === 'main' ? 'groups-id' : 'groups-id-index-' + key, params: {id: record.id}}"
+            :active="key === 'main' ? !tab : tab === key"
+            active-class=""
+            @click="tab = key === 'main' ? '' : key"
+          >
+            {{ $t('models.user_group.tabs.' + key + '.title') }}
+          </BNavItem>
+        </template>
       </BNav>
-
       <div class="mt-3">
         <FormUserGroup v-show="!tab" v-model="record" />
         <RouterView />
@@ -24,38 +22,51 @@
 </template>
 
 <script setup lang="ts">
-const router = useRouter()
-const record = ref<Record<string, any>>({})
-
 const route = useRoute()
+const router = useRouter()
+
+const groupId = Number(route.params.id)
+const record = ref({
+  id: 0,
+  name: '',
+  description: '',
+  active: true,
+  aw_parallel: false,
+  aw_contexts: [],
+})
 const tab = ref('')
 const properties = computed(() => {
   return {
-    url: 'mgr/user-groups/' + route.params.id,
-    title: $t('models.user_group.title_one') + ': ' + record.value.name,
+    url: 'mgr/user-groups' + (groupId ? '/' + groupId : ''),
+    title: $t('models.user_group.title_one') + (groupId ? ': ' + record.value.name : ''),
     updateKey: 'mgr-user-groups',
-    method: 'patch',
+    method: groupId ? 'patch' : 'put',
     size: tab.value ? 'lg' : 'md',
-    hideFooter: Boolean(tab.value),
+    hideFooter: tab.value !== '',
     onHidden() {
       router.push({name: 'groups'})
     },
   }
 })
 
-try {
-  record.value = await useGet(properties.value.url)
-} catch (e) {
-  console.error(e)
-  useError()
+if (groupId) {
+  try {
+    record.value = await useGet(properties.value.url)
+  } catch (e) {
+    console.error(e)
+    useError()
+  }
 }
 
-const tabs = {
-  users: 'models.user.title_many',
-}
-Object.keys(tabs).forEach((g) => {
+const tabs = getSystemSetting(groupId ? 'group-tabs-edit' : 'group-tabs-create')
+  .split(',')
+  .map((g: string) => g.trim())
+tabs.forEach((g) => {
   if (String(route.name).includes(g)) {
     tab.value = g
   }
 })
+if (!tabs.includes('main')) {
+  tabs.unshift('main')
+}
 </script>

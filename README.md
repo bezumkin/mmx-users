@@ -20,6 +20,7 @@ wget https://raw.githubusercontent.com/modxcms/revolution/v3.0.5-pl/composer.jso
 ```
 
 ### Add Repository
+
 ```bash
 composer config repositories.mmx-users vcs git@bitbucket.org:sterc/mmx-users.git
 ```
@@ -29,6 +30,13 @@ composer config repositories.mmx-users vcs git@bitbucket.org:sterc/mmx-users.git
 
 ```bash
 composer require mmx/users --update-no-dev
+composer exec mmx-users install
+```
+
+### Update
+
+```bash
+composer update mmx/users --no-dev
 composer exec mmx-users install
 ```
 

@@ -8,7 +8,7 @@
       <BFormTextarea v-model="record.description" rows="3" />
     </BFormGroup>
 
-    <BFormGroup :label="$t('models.user_group.parent')">
+    <BFormGroup :label="$t('models.user_group.parent.name')">
       <MmxInputComboBox
         v-model="record.parent"
         url="mgr/user-groups"
@@ -22,7 +22,7 @@
       <BFormInput v-model.number="record.rank" />
     </BFormGroup>
 
-    <BFormGroup>
+    <BFormGroup v-if="!record.id">
       <BFormCheckbox v-model="record.aw_parallel">{{ $t('models.user_group.resource_group.create') }}</BFormCheckbox>
     </BFormGroup>
 

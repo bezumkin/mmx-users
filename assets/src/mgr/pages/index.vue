@@ -7,7 +7,7 @@
       </BRow>
     </template>
     <template #cell()="{value, field}">
-      <div v-if="field.key === 'settings.twofactoroptions'">
+      <div v-if="cellType(field.key).startsWith('bool')">
         <i v-if="Number(value)" class="icon icon-check text-success" />
         <i v-else class="icon icon-times text-danger" />
       </div>
@@ -21,22 +21,23 @@
 const url = 'mgr/users'
 const table = ref()
 const headerActions = computed(() => {
-  return [{route: {name: 'index-create'}, icon: 'plus', title: $t('models.user.title_one')}]
+  return [{route: {name: 'index-user', params: {user: 0}}, icon: 'plus', title: $t('models.user.title_one')}]
 })
 const fields = computed(() => {
-  return [
-    {key: 'id', label: $t('models.user.id'), sortable: true},
-    {key: 'username', label: $t('models.user.username'), sortable: true},
-    {key: 'fullname', label: $t('models.user.fullname'), sortable: true},
-    {key: 'comment', label: $t('models.user.comment'), sortable: true},
-    {key: 'email', label: $t('models.user.email'), sortable: true},
-    {
-      key: 'settings.twofactoroptions',
-      label: $t('models.user.settings.twofactoroptions'),
-      sortable: true,
-    },
-    // {key: 'createdon', label: $t('models.user.createdon'), sortable: true, formatter: formatDate},
-  ]
+  const columns = getSystemSetting('user-grid-columns')
+  const enabled: any = []
+  Object.keys(columns).forEach((key: string) => {
+    const field = {key, label: $t('models.user.' + key), ...columns[key]}
+    if (key === 'createdon') {
+      field.formatter = formatDate
+    }
+    if (field.sort) {
+      sort.value = key
+      dir.value = field.dir === 'desc' ? 'desc' : 'asc'
+    }
+    enabled.push(field)
+  })
+  return enabled
 })
 const tableActions = computed(() => {
   return [
@@ -65,6 +66,11 @@ function rowClass(item: any) {
   }
 
   return cls
+}
+
+function cellType(key: string) {
+  const field = fields.value.find((f: any) => f.key === key)
+  return field && field.type ? field.type : ''
 }
 
 async function sendInvitation(user: Record<string, any>) {

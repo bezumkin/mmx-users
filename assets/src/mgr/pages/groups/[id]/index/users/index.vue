@@ -1,10 +1,13 @@
 <template>
-  <MmxTable ref="table" v-bind="{url, fields, headerActions, tableActions, filters, sort, dir, updateKey}">
-    <template #cell(user)="{value}">
-      <BLink :to="{name: 'index-user', params: {id: value.id}}">{{ value.username }}</BLink>
-    </template>
-    <RouterView />
-  </MmxTable>
+  <div>
+    <div v-if="!Number(params.id)" class="alert alert-info" v-html="$t('models.user_group.tabs.users.disabled')" />
+    <MmxTable v-else ref="table" v-bind="{url, fields, headerActions, tableActions, filters, sort, dir, updateKey}">
+      <template #cell(user)="{value}">
+        <BLink :to="{name: 'index-user', params: {user: value.id}}">{{ value.username }}</BLink>
+      </template>
+      <RouterView />
+    </MmxTable>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,14 +1,18 @@
 <template>
-  <MmxTable ref="table" v-bind="{url, fields, headerActions, tableActions, filters, sort, dir, updateKey}">
-    <template #cell(group)="{value}">
-      <BLink :to="{name: 'groups-id', params: {id: value.id}}">{{ value.name }}</BLink>
-    </template>
-    <RouterView />
-  </MmxTable>
+  <div>
+    <FormUserGroups v-if="!Number(params.user)" v-model="record.groups" />
+    <MmxTable v-else ref="table" v-bind="{url, fields, headerActions, tableActions, filters, sort, dir, updateKey}">
+      <template #cell(group)="{value}">
+        <BLink :to="{name: 'groups-id', params: {id: value.id}}">{{ value.name }}</BLink>
+      </template>
+      <RouterView />
+    </MmxTable>
+  </div>
 </template>
 
 <script setup lang="ts">
 const {params} = useRoute()
+const record = inject<Record<string, any>>('record') || {}
 
 const url = computed(() => {
   return 'mgr/user/' + params.user + '/groups'

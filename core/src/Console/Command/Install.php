@@ -69,16 +69,95 @@ class Install extends Command
         }
 
         $settings = [
-            // 'some-setting' => '',
+            'group-grid-columns' => [
+                'xtype' => 'textarea',
+                'value' => json_encode([
+                    'id' => ['sortable' => true],
+                    'name' => ['sortable' => true],
+                    'parent.name' => ['sortable' => false],
+                    'members_count' => ['sortable' => true],
+                    'rank' => ['sortable' => true, 'sort' => true],
+                ], JSON_THROW_ON_ERROR),
+            ],
+            'group-tabs-create' => [
+                'xtype' => 'textfield',
+                'value' => 'main',
+            ],
+            'group-tabs-edit' => [
+                'xtype' => 'textfield',
+                'value' => 'main,users',
+            ],
+            'user-grid-columns' => [
+                'xtype' => 'textarea',
+                'value' => json_encode([
+                    'id' => ['sortable' => true, 'sort' => true, 'dir' => 'desc'],
+                    'username' => ['sortable' => true],
+                    'fullname' => ['sortable' => true],
+                    'comment' => ['sortable' => true],
+                    'email' => ['sortable' => true],
+                    'settings.twofactoroptions' => ['sortable' => true, 'type' => 'boolean'],
+                ], JSON_THROW_ON_ERROR),
+            ],
+            'user-form-fields-available' => [
+                'xtype' => 'textarea',
+                'value' => json_encode([
+                    'username' => ['type' => 'text', 'required' => true],
+                    'email' => ['type' => 'email', 'required' => true],
+                    'fullname' => ['type' => 'text'],
+                    'dob' => ['type' => 'date'],
+                    'gender' => ['type' => 'gender'],
+                    'website' => ['type' => 'url'],
+                    'phone' => ['type' => 'tel'],
+                    'mobilephone' => ['type' => 'tel'],
+                    'fax' => ['type' => 'tel'],
+                    'country' => ['type' => 'country'],
+                    'state' => ['type' => 'text'],
+                    'city' => ['type' => 'text'],
+                    'zip' => ['type' => 'text'],
+                    'address' => ['type' => 'textarea'],
+                    'active' => ['type' => 'checkbox'],
+                    'blocked' => ['type' => 'checkbox'],
+                    'sudo' => ['type' => 'checkbox'],
+                    'extended.pay_afterwards' => ['type' => 'checkbox', 'default' => false],
+                    'settings.twofactoroptions' => ['type' => 'checkbox', 'default' => false],
+                    'extended.main_branch' => ['type' => 'select', 'options' => ['', 'Drachten', 'Leeuwarden']],
+                    'extended.max_days_order_overview' => ['type' => 'number', 'default' => 60],
+                    'comment' => ['type' => 'text', 'required' => true],
+                    'photo' => ['type' => 'image'],
+                    'extended.company_logo' => ['type' => 'image'],
+                    'password' => ['type' => 'user-password'],
+                ], JSON_THROW_ON_ERROR),
+            ],
+            'user-form-fields-user' => [
+                'xtype' => 'textarea',
+                'value' => json_encode([
+                    ['username', 'email', 'fullname', 'website', 'password'],
+                    [['active', 'blocked'], ['extended.pay_afterwards', 'settings.twofactoroptions'], 'extended.main_branch', 'extended.max_days_order_overview', 'comment', 'extended.company_logo'],
+                ], JSON_THROW_ON_ERROR),
+            ],
+            'user-form-fields-sudo' => [
+                'xtype' => 'textarea',
+                'value' => json_encode([
+                    ['username', 'email', 'fullname', ['dob', 'gender'], 'website', ['phone', 'mobilephone'], 'fax', 'country', ['state', 'city', 'zip'], 'address'],
+                    [['active', 'blocked', 'sudo'], ['extended.pay_afterwards', 'settings.twofactoroptions'], 'extended.main_branch', 'extended.max_days_order_overview', 'comment', 'photo', 'extended.company_logo', 'password'],
+                ], JSON_THROW_ON_ERROR),
+            ],
+            'user-tabs-create' => [
+                'xtype' => 'textfield',
+                'value' => 'main,extended,groups',
+            ],
+            'user-tabs-edit' => [
+                'xtype' => 'textfield',
+                'value' => 'main,extended,groups,settings,commerce-addresses',
+            ],
         ];
-        foreach ($settings as $key => $value) {
+        foreach ($settings as $key => $data) {
             $key = implode('.', [App::NAMESPACE, $key]);
             if (!SystemSetting::query()->find($key)) {
                 $setting = new SystemSetting();
                 $setting->key = $key;
-                $setting->xtype = 'textfield';
-                $setting->value = $value;
                 $setting->namespace = App::NAMESPACE;
+                $setting->fill($data);
                 $setting->save();
                 $output->writeln('<info>Created system setting "' . $setting->key . '"</info>');
             }
