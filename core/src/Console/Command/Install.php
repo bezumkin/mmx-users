@@ -118,7 +118,7 @@ class Install extends Command
                     'active' => ['type' => 'checkbox'],
                     'blocked' => ['type' => 'checkbox'],
                     'sudo' => ['type' => 'checkbox'],
-                    'comment' => ['type' => 'text'],
+                    'comment' => ['type' => 'textarea'],
                     'photo' => ['type' => 'image'],
                     'password' => ['type' => 'user-password'],
                     // 'extended.something' => ['type' => 'checkbox', 'default' => false],
