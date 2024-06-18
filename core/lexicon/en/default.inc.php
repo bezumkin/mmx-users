@@ -30,22 +30,12 @@ $_tmp = [
             'gender_female' => 'Female',
             'gender_other' => 'Other',
             'dob' => 'Date of Birth',
-            'comment' => 'Company',
+            'comment' => 'Comment',
             'createdon' => 'Created On',
             'status' => [
                 'any' => 'Any',
                 'active' => 'Active',
                 'inactive' => 'Inactive',
-            ],
-            'extended' => [
-                'pay_afterwards' => 'Pay afterwards',
-                'main_branch' => 'Main branch',
-                'max_days_order_overview' => 'Max days order overview',
-                'logo' => 'Logo',
-                'company_logo' => 'Company Logo',
-            ],
-            'settings' => [
-                'twofactoroptions' => '2FA',
             ],
             'password' => [
                 'new' => 'New Password',
@@ -204,9 +194,6 @@ $_tmp = [
             'confirm' => 'Are you sure you want to delete this entry?',
         ],
     ],
-    /* 'snippets' => [
-        'nocss' => 'Do not load frontend styles',
-    ], */
     'success' => [
         'user' => [
             'invited' => 'The invitation was successfully sent!',
@@ -226,9 +213,9 @@ $_tmp = [
     'group-grid-columns' => 'User group grid columns',
     'group-grid-columns_desc' => 'Specify the order and settings of columns for user group grid',
     'group-tabs-create' => 'User group create tabs',
-    'group-tabs-create_desc' => 'Tabs of user group modal when you create a new group. Available tabs are: main, users. Main tab is mandatory.',
+    'group-tabs-create_desc' => 'Tabs of user group modal when you create a new group. Available tabs are: main, users.',
     'group-tabs-edit' => 'User group edit tabs',
-    'group-tabs-edit_desc' => 'Tabs of user group modal when you edit an existing group. Available tabs are: main, users.  Main tab is mandatory.',
+    'group-tabs-edit_desc' => 'Tabs of user group modal when you edit an existing group. Available tabs are: main, users.',
     'user-grid-columns' => 'User grid columns',
     'user-grid-columns_desc' => 'Specify the order and settings of columns for user grid',
     'user-form-fields-available' => 'Available user fields',
@@ -236,11 +223,11 @@ $_tmp = [
     'user-form-fields-user' => 'User form fields',
     'user-form-fields-user_desc' => 'Fields of user form for regular manager.',
     'user-form-fields-sudo' => 'User fields for sudo',
-    'user-form-fields-sudo_desc' => 'Fields of user form for manager with sudo permissions. If the setting is empty, all fields will be enabled.',
+    'user-form-fields-sudo_desc' => 'Fields of user form for manager with sudo permissions.',
     'user-tabs-create' => 'User create tabs',
-    'user-tabs-create_desc' => 'Tabs of user modal when you create a new user. Available tabs are: main, extended, settings, groups and commerce-addresses. Main tab is mandatory.',
+    'user-tabs-create_desc' => 'Tabs of user modal when you create a new user. Available tabs are: main, extended, settings, groups and commerce-addresses.',
     'user-tabs-edit' => 'User edit tabs',
-    'user-tabs-edit_desc' => 'Tabs of user modal when you edit an existing user. Available tabs are: main, extended, settings, groups and commerce-addresses.  Main tab is mandatory.',
+    'user-tabs-edit_desc' => 'Tabs of user modal when you edit an existing user. Available tabs are: main, extended, settings, groups and commerce-addresses.',
 ];
 $_lang = array_merge($_lang, MMX\Users\App::prepareLexicon($_tmp, 'setting_' . MMX\Users\App::NAMESPACE));
 
