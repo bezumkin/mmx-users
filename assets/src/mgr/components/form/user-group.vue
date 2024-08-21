@@ -40,7 +40,7 @@
               <option disabled value="">{{ $t('models.user_group.resource_group.select') }}</option>
             </template>
           </BFormSelect>
-          <div v-if="tags.length > 0" class="d-flex my-2 gap-1">
+          <div v-if="tags.length > 0" class="d-flex flex-wrap my-2 gap-1">
             <div v-for="tag in tags" :key="tag">
               <BFormTag variant="info" @remove="removeTag(tag)">{{ tag }}</BFormTag>
             </div>
